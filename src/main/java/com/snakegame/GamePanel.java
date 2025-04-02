@@ -50,7 +50,7 @@ public class GamePanel extends JPanel implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        snake.move();
+//        snake.move(e);
         repaint();
     }
 }

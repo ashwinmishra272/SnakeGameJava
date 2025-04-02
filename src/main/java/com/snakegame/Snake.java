@@ -33,14 +33,18 @@ public class Snake {
      * should move in the direction
      * Should avoid going out of the boundary
      */
-public void move(){
+public void move(GameEngine engine){
     Point head =body.getFirst();
+    if(engine.isGameOver()){
+        return;
+    }
     Point newHead=switch (direction) {
         case UP -> new Point(head.x, head.y - 1);
         case DOWN -> new Point(head.x, head.y + 1);
         case LEFT -> new Point(head.x - 1, head.y);
         case RIGHT -> new Point(head.x + 1, head.y);
     };
+   engine.checkCollision(this);
     body.addFirst(newHead);
     body.removeLast();
 }
@@ -54,5 +58,13 @@ public void move(){
         for (Point p : body) {
             g.fillRect(p.x * TILE_SIZE, p.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
         }
+    }
+
+    public Point getHead() {
+        return body.getFirst();
+    }
+
+    public LinkedList<Point> getBody() {
+        return body;
     }
 }
